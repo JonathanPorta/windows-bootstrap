@@ -8,7 +8,7 @@ Write-Host "Running the chef-solo installer..."
 (Start-Process -FilePath "msiexec.exe" -ArgumentList "/package $chefSoloInstaller /passive" -Wait -Passthru).ExitCode
 
 # Download the chef-dk installer
-$chefDkInstaller = Join-Path $tmpDir 'chef-solo.msi'
+$chefDkInstaller = Join-Path $tmpDir 'chef-dk.msi'
 Write-Host "Downloading chef-dk MSI to $chefDkInstaller..."
 DoFileDownload 'https://opscode-omnibus-packages.s3.amazonaws.com/windows/2008r2/x86_64/chefdk-0.4.0-1.msi' "$chefDkInstaller"
 
