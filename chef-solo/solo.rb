@@ -1,5 +1,5 @@
 # TODO: Abstract this config to make it easier to install on other server types
-cookbook_path ['/ogs/cookbooks/']
+cookbook_path ['C:\ogs\cookbooks']
 
 log_level :debug
 verbose_logging true
