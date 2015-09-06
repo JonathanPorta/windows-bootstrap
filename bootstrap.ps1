@@ -9,6 +9,10 @@
 $tmpDir = 'C:\tmp'
 if (![System.IO.Directory]::Exists($tmpDir)) {[System.IO.Directory]::CreateDirectory($tmpDir)}
 
+# define installation directory and make sure it exists
+$installDir = 'C:\ogs'
+if (![System.IO.Directory]::Exists($installDir)) {[System.IO.Directory]::CreateDirectory($installDir)}
+
 # define a downloader function to make downloading easier
 function DoFileDownload {
 param (
@@ -41,17 +45,14 @@ $7zaExe = Join-Path $tmpDir '7za.exe'
 DoFileDownload 'https://chocolatey.org/7za.exe' "$7zaExe"
 
 # unzip the package
-Write-Host "Extracting $bootstrapArchive to $tmpDir..."
-Start-Process "$7zaExe" -ArgumentList "x -o`"$tmpDir`" -y `"$bootstrapArchive`"" -Wait -NoNewWindow
+Write-Host "Extracting $bootstrapArchive to $installDir ..."
+Start-Process "$7zaExe" -ArgumentList "x -o`"$installDir`" -y `"$bootstrapArchive`"" -Wait -NoNewWindow
 
 # define installer path vars
-$bootstrapDir = Join-Path $tmpDir 'windows-bootstrap-master'
+$bootstrapDir = Join-Path $installDir 'windows-bootstrap-master'
 $toolsDir = Join-Path $bootstrapDir 'powershell'
 $chefDir = Join-Path $bootstrapDir 'chef-solo'
 $installer = Join-Path $bootstrapDir 'install.ps1'
-
-# define installation path vars
-$installDir = 'C:\ogs'
 
 # define chef path vars
 # TODO: abstract this config to make it easier to provision other server types
