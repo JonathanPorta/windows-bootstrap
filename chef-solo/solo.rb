@@ -1,7 +1,10 @@
 # TODO: Abstract this config to make it easier to install on other server types
 cookbook_path ['C:\ogs\cookbooks']
 
-log_level :debug
+file_cache_path '/var/chef/cache'
+file_backup_path '/var/chef/backup'
+
+log_level :info
 verbose_logging true
 
 # Verify all HTTPS connections (recommended)
