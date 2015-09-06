@@ -14,12 +14,12 @@ function DoFileDownload {
 param (
   [string]$url,
   [string]$file,
-  [bool]$overwrite=$true
+  [bool]$overwrite=$false
  )
   Write-Host "Preparing to download $url to $file..."
   Write-Host "Checking if $file already exists..."
 
-  If (Test-Path $file -And !$overwrite){
+  If (Test-Path $file -And (!$overwrite)){
     Write-Host "Not downloading because $file already exists..."
   }
   Else{
@@ -33,7 +33,7 @@ param (
 # download windows-bootstrap repo
 Write-Host "Download windows-bootstrap files..."
 $bootstrapArchive = Join-Path $tmpDir "bootstrap.zip"
-DoFileDownload 'https://github.com/JonathanPorta/windows-bootstrap/archive/master.zip' $bootstrapArchive
+DoFileDownload 'https://github.com/JonathanPorta/windows-bootstrap/archive/master.zip' $bootstrapArchive $true
 
 # download 7zip
 Write-Host "Download 7Zip commandline tool..."
