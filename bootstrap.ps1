@@ -54,6 +54,7 @@ $installer = Join-Path $bootstrapDir 'install.ps1'
 # TODO: abstract this config to make it easier to provision other server types
 $cookbookUrl = 'https://github.com/JonathanPorta/rust-server-cookbook.git'
 $cookbookPath = 'C:\cookbooks\rust'
+$BERKSHELF_PATH = 'C:\cookbooks' # tell berks to install deps here
 $cookbookRef = 'master'
 
 # Start the installation
