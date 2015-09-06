@@ -6,8 +6,8 @@
 #
 
 # Make sure we have a temp directory
-$tempDir = 'C:\tmp'
-if (![System.IO.Directory]::Exists($tempDir)) {[System.IO.Directory]::CreateDirectory($tempDir)}
+$tmpDir = 'C:\tmp'
+if (![System.IO.Directory]::Exists($tmpDir)) {[System.IO.Directory]::CreateDirectory($tmpDir)}
 
 # define a downloader function to make downloading easier
 function Download-File {
@@ -23,20 +23,20 @@ param (
 
 # download windows-bootstrap repo
 Write-Host "Download windows-bootstrap files..."
-$bootstrapArchive = Join-Path $tempDir "bootstrap.zip"
+$bootstrapArchive = Join-Path $tmpDir "bootstrap.zip"
 Download-File 'https://github.com/JonathanPorta/windows-bootstrap/archive/master.zip' $bootstrapArchive
 
 # download 7zip
 Write-Host "Download 7Zip commandline tool..."
-$7zaExe = Join-Path $tempDir '7za.exe'
+$7zaExe = Join-Path $tmpDir '7za.exe'
 Download-File 'https://chocolatey.org/7za.exe' "$7zaExe"
 
 # unzip the package
-Write-Host "Extracting $bootstrapArchive to $tempDir..."
-Start-Process "$7zaExe" -ArgumentList "x -o`"$tempDir`" -y `"$bootstrapArchive`"" -Wait -NoNewWindow
+Write-Host "Extracting $bootstrapArchive to $tmpDir..."
+Start-Process "$7zaExe" -ArgumentList "x -o`"$tmpDir`" -y `"$bootstrapArchive`"" -Wait -NoNewWindow
 
 # define installer path vars
-$bootstrapDir = Join-Path $tempDir 'windows-bootstrap-master'
+$bootstrapDir = Join-Path $tmpDir 'windows-bootstrap-master'
 $toolsDir = Join-Path $bootstrapDir 'powershell'
 $chefDir = Join-Path $bootstrapDir 'chef-solo'
 $installer = Join-Path $bootstrapDir 'install.ps1'
