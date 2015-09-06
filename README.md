@@ -11,3 +11,7 @@ Then you can download the bootstrap script by running:
 `iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/JonathanPorta/windows-bootstrap/master/bootstrap.ps1'))`
 
 This will download a copy of this repository, unzip it, and then run `install.ps1`.
+
+Or, better yet, one command:
+
+`PowerShell.exe -ExecutionPolicy Unrestricted "iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/JonathanPorta/windows-bootstrap/master/bootstrap.ps1'))"`
