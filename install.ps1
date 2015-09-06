@@ -9,7 +9,7 @@ cinst -y git.install
 
 Write-Host "Launching chef powershell installer script..."
 $chefInstaller = Join-Path $toolsDir 'chef-installer.ps1'
-#iex $chefInstaller
+iex $chefInstaller
 
 Write-Host "Launching chef repo powershell script..."
 $chefRepo = Join-Path $toolsDir 'chef-repo.ps1'
