@@ -1,10 +1,15 @@
+# bootstrap.ps1
+#
+# Installs needed files to bootstrap a fresh windows server installation for game hosting.
 # Based on the chocolatey installer script from https://chocolatey.org/install.ps1
+# For more information: https://github.com/JonathanPorta/windows-bootstrap
+#
+
+# Make sure we have a temp directory
 $tempDir = 'C:\tmp'
 if (![System.IO.Directory]::Exists($tempDir)) {[System.IO.Directory]::CreateDirectory($tempDir)}
 
-$url = "https://github.com/JonathanPorta/windows-bootstrap/archive/master.zip"
-$file = Join-Path $tempDir "bootstrap.zip"
-
+# define a downloader function to make downloading easier
 function Download-File {
 param (
   [string]$url,
@@ -16,23 +21,25 @@ param (
   $downloader.DownloadFile($url, $file)
 }
 
-# download the package
-Download-File $url $file
+# download windows-bootstrap repo
+Write-Host "Download windows-bootstrap files..."
+$bootstrapArchive = Join-Path $tempDir "bootstrap.zip"
+Download-File 'https://github.com/JonathanPorta/windows-bootstrap/archive/master.zip' $bootstrapArchive
 
 # download 7zip
-Write-Host "Download 7Zip commandline tool"
+Write-Host "Download 7Zip commandline tool..."
 $7zaExe = Join-Path $tempDir '7za.exe'
-
 Download-File 'https://chocolatey.org/7za.exe' "$7zaExe"
 
 # unzip the package
-Write-Host "Extracting $file to $tempDir..."
-Start-Process "$7zaExe" -ArgumentList "x -o`"$tempDir`" -y `"$file`"" -Wait -NoNewWindow
+Write-Host "Extracting $bootstrapArchive to $tempDir..."
+Start-Process "$7zaExe" -ArgumentList "x -o`"$tempDir`" -y `"$bootstrapArchive`"" -Wait -NoNewWindow
 
-$toolsDir = Join-Path $tempDir 'windows-bootstrap-master'
-$installer = Join-Path $toolsDir 'install.ps1'
+# Define some paths
+$bootstrapDir = Join-Path $tempDir 'windows-bootstrap-master'
+$toolsDir = Join-Path $bootstrapDir 'powershell'
+$chefDir = Join-Path $bootstrapDir 'chef-solo'
 
-get-variable -scope script
-cd $toolsDir
-iex $installer
-get-variable -scope script
+# Start the installation
+Write-Host "Begin installation..."
+iex Join-Path $bootstrapDir 'install.ps1'
