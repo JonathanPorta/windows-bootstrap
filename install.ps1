@@ -1,4 +1,5 @@
-get-variable -scope script
+# install all of the pieces and parts necessary to get the server ready to
+# start running chef converges.
 
 Write-Host "Downloading and running Chocolatey install script..."
 iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))

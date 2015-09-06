@@ -1,16 +1,4 @@
-$tempDir = 'C:\tmp'
-if (![System.IO.Directory]::Exists($tempDir)) {[System.IO.Directory]::CreateDirectory($tempDir)}
-
-function Download-File {
-param (
-  [string]$url,
-  [string]$file
- )
-  Write-Host "Downloading $url to $file"
-  $downloader = new-object System.Net.WebClient
-  $downloader.Proxy.Credentials=[System.Net.CredentialCache]::DefaultNetworkCredentials;
-  $downloader.DownloadFile($url, $file)
-}
+# requires that bootstrap.ps1 setup the proper paths and download function.
 
 # Download the chef-solo installer
 $chefSoloInstaller = Join-Path $tempDir 'chef-solo.msi'
