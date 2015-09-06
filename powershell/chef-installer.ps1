@@ -1,4 +1,5 @@
 $tempDir = 'C:\tmp'
+if (![System.IO.Directory]::Exists($tempDir)) {[System.IO.Directory]::CreateDirectory($tempDir)}
 
 function Download-File {
 param (

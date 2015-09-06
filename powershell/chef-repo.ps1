@@ -1,4 +1,5 @@
 $tempDir = 'C:\tmp'
+if (![System.IO.Directory]::Exists($tempDir)) {[System.IO.Directory]::CreateDirectory($tempDir)}
 
 $gitUrl = 'https://github.com/JonathanPorta/rust-server-cookbook.git'
 $repoPath = 'C:\cookbooks\rust'

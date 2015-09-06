@@ -1,14 +1,36 @@
-Write-Host "Downloading and running Chocolatey install script..."
-iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
+# Based on the chocolatey installer script from https://chocolatey.org/install.ps1
+$tempDir = 'C:\tmp'
+if (![System.IO.Directory]::Exists($tempDir)) {[System.IO.Directory]::CreateDirectory($tempDir)}
 
-Write-Host "Launching chef powershell installer script..."
-iex .\powershell\chef-installer.ps1
+$url = "https://github.com/JonathanPorta/windows-bootstrap/archive/master.zip"
+$file = Join-Path $tempDir "bootstrap.zip"
 
-Write-Host "Launching git installer..."
-cinst -y git.install
+function Download-File {
+param (
+  [string]$url,
+  [string]$file
+ )
+  Write-Host "Downloading $url to $file"
+  $downloader = new-object System.Net.WebClient
+  $downloader.Proxy.Credentials=[System.Net.CredentialCache]::DefaultNetworkCredentials;
+  $downloader.DownloadFile($url, $file)
+}
 
-Write-Host "Launching chef repo powershell script..."
-iex .\powershell\chef-repo.ps1
+# download the package
+Download-File $url $file
 
-Write-Host "Launching chef-solo powershell script..."
-iex .\powershell\chef-solo.ps1
+# download 7zip
+Write-Host "Download 7Zip commandline tool"
+$7zaExe = Join-Path $tempDir '7za.exe'
+
+Download-File 'https://chocolatey.org/7za.exe' "$7zaExe"
+
+# unzip the package
+Write-Host "Extracting $file to $tempDir..."
+Start-Process "$7zaExe" -ArgumentList "x -o`"$tempDir`" -y `"$file`"" -Wait -NoNewWindow
+
+$toolsDir = Join-Path $tempDir 'windows-bootstrap-master'
+$installer = Join-Path $toolsDir 'install.ps1'
+
+cd $toolsDir
+iex $installer
