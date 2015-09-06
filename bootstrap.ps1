@@ -50,11 +50,14 @@ $toolsDir = Join-Path $bootstrapDir 'powershell'
 $chefDir = Join-Path $bootstrapDir 'chef-solo'
 $installer = Join-Path $bootstrapDir 'install.ps1'
 
+# define installation path vars
+$installDir = 'C:\ogs'
+
 # define chef path vars
 # TODO: abstract this config to make it easier to provision other server types
 $cookbookUrl = 'https://github.com/JonathanPorta/rust-server-cookbook.git'
-$cookbookPath = 'C:\cookbooks\rust'
-$Env:BERKSHELF_PATH='C:\cookbooks' # tell berks to install deps here
+$cookbookPath = Join-Path $installDir 'rust' #TODO: refactor so that this supports other types
+$Env:BERKSHELF_PATH = $installDir # tell berks to install deps here
 $cookbookRef = 'master'
 
 # Start the installation
