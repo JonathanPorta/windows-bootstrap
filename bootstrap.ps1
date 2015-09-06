@@ -39,7 +39,8 @@ Start-Process "$7zaExe" -ArgumentList "x -o`"$tempDir`" -y `"$bootstrapArchive`"
 $bootstrapDir = Join-Path $tempDir 'windows-bootstrap-master'
 $toolsDir = Join-Path $bootstrapDir 'powershell'
 $chefDir = Join-Path $bootstrapDir 'chef-solo'
+$installer = Join-Path $bootstrapDir 'install.ps1'
 
 # Start the installation
 Write-Host "Begin installation..."
-iex Join-Path $bootstrapDir 'install.ps1'
+iex $installer
