@@ -1,13 +1,8 @@
-$tempDir = 'C:\tmp'
-if (![System.IO.Directory]::Exists($tempDir)) {[System.IO.Directory]::CreateDirectory($tempDir)}
-
+# save this so we can cd back to the starting directory before the script exits
 $startingDir = $PWD
-$cookbookUrl = 'https://github.com/JonathanPorta/rust-server-cookbook.git'
-$cookbookPath = 'C:\cookbooks\rust'
-$cookbookRef = 'master'
 
 # Clone the repository
-Write-Host "Cloning $cookbookUrl into $cookbookPath"
+Write-Host "Cloning $cookbookUrl into $cookbookPath..."
 git clone $cookbookUrl $cookbookPath
 
 Write-Host "Reseting repository in $cookbookPath to origin/$cookbookRef"

@@ -35,11 +35,16 @@ Download-File 'https://chocolatey.org/7za.exe' "$7zaExe"
 Write-Host "Extracting $bootstrapArchive to $tempDir..."
 Start-Process "$7zaExe" -ArgumentList "x -o`"$tempDir`" -y `"$bootstrapArchive`"" -Wait -NoNewWindow
 
-# Define some paths
+# define installer path vars
 $bootstrapDir = Join-Path $tempDir 'windows-bootstrap-master'
 $toolsDir = Join-Path $bootstrapDir 'powershell'
 $chefDir = Join-Path $bootstrapDir 'chef-solo'
 $installer = Join-Path $bootstrapDir 'install.ps1'
+
+# define chef path vars
+$cookbookUrl = 'https://github.com/JonathanPorta/rust-server-cookbook.git'
+$cookbookPath = 'C:\cookbooks\rust'
+$cookbookRef = 'master'
 
 # Start the installation
 Write-Host "Begin installation..."
