@@ -1,3 +1,4 @@
+# TODO: Abstract this config to make it easier to install on other server types
 cookbook_path ['/cookbooks/', '/Users/ogs/.berkshelf/cookbooks/']
 
 file_cache_path '/var/chef/cache'

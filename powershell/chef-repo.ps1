@@ -9,7 +9,7 @@ Write-Host "Cloning $cookbookUrl into $cookbookPath..."
 git clone $cookbookUrl $cookbookPath
 
 # do a hard reset to the target ref to ensure we are up to date
-Write-Host "Reseting repository in $cookbookPath to origin/$cookbookRef"
+Write-Host "Reseting repository in $cookbookPath to origin/$cookbookRef..."
 cd $cookbookPath
 git fetch origin
 git reset --hard origin/$cookbookRef
