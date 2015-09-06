@@ -56,7 +56,7 @@ $installDir = 'C:\ogs'
 # define chef path vars
 # TODO: abstract this config to make it easier to provision other server types
 $cookbookUrl = 'https://github.com/JonathanPorta/rust-server-cookbook.git'
-$cookbookPath = Join-Path $installDir 'rust' #TODO: refactor so that this supports other types
+$cookbookPath = Join-Path $installDir 'cookbooks/rust-server' #TODO: refactor so that this supports other types
 $Env:BERKSHELF_PATH = $installDir # tell berks to install deps here
 $cookbookRef = 'master'
 
