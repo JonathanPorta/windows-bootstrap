@@ -32,5 +32,7 @@ Start-Process "$7zaExe" -ArgumentList "x -o`"$tempDir`" -y `"$file`"" -Wait -NoN
 $toolsDir = Join-Path $tempDir 'windows-bootstrap-master'
 $installer = Join-Path $toolsDir 'install.ps1'
 
+get-variable -scope script
 cd $toolsDir
 iex $installer
+get-variable -scope script

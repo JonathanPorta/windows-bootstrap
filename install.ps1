@@ -1,3 +1,5 @@
+get-variable -scope script
+
 Write-Host "Downloading and running Chocolatey install script..."
 iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
 
