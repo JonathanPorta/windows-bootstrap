@@ -15,10 +15,17 @@ param (
   [string]$url,
   [string]$file
  )
-  Write-Host "Downloading $url to $file"
-  $downloader = new-object System.Net.WebClient
-  $downloader.Proxy.Credentials=[System.Net.CredentialCache]::DefaultNetworkCredentials;
-  $downloader.DownloadFile($url, $file)
+  Write-Host "Preparing to download $url to $file..."
+  Write-Host "Checking if $file already exists..."
+
+  If (!Test-Path $file){
+    Write-Host "Downloading $url to $file..."
+    $downloader = new-object System.Net.WebClient
+    $downloader.Proxy.Credentials=[System.Net.CredentialCache]::DefaultNetworkCredentials;
+    $downloader.DownloadFile($url, $file)
+  } Else{
+    Write-Host "Not downloading because $file already exists..."
+  }
 }
 
 # download windows-bootstrap repo
