@@ -13,12 +13,13 @@ if (![System.IO.Directory]::Exists($tmpDir)) {[System.IO.Directory]::CreateDirec
 function DoFileDownload {
 param (
   [string]$url,
-  [string]$file
+  [string]$file,
+  [bool]$overwrite=$true
  )
   Write-Host "Preparing to download $url to $file..."
   Write-Host "Checking if $file already exists..."
 
-  If (Test-Path $file){
+  If (Test-Path $file && !$overwrite){
     Write-Host "Not downloading because $file already exists..."
   }
   Else{
