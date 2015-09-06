@@ -19,7 +19,7 @@ param (
   Write-Host "Preparing to download $url to $file..."
   Write-Host "Checking if $file already exists..."
 
-  If (Test-Path $file && !$overwrite){
+  If (Test-Path $file -And !$overwrite){
     Write-Host "Not downloading because $file already exists..."
   }
   Else{
