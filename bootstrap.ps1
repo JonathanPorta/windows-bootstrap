@@ -42,6 +42,7 @@ $chefDir = Join-Path $bootstrapDir 'chef-solo'
 $installer = Join-Path $bootstrapDir 'install.ps1'
 
 # define chef path vars
+# TODO: abstract this config to make it easier to provision other server types
 $cookbookUrl = 'https://github.com/JonathanPorta/rust-server-cookbook.git'
 $cookbookPath = 'C:\cookbooks\rust'
 $cookbookRef = 'master'
