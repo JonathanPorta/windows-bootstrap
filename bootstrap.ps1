@@ -10,7 +10,7 @@ $tmpDir = 'C:\tmp'
 if (![System.IO.Directory]::Exists($tmpDir)) {[System.IO.Directory]::CreateDirectory($tmpDir)}
 
 # define a downloader function to make downloading easier
-function Download-File {
+function DoFileDownload {
 param (
   [string]$url,
   [string]$file
@@ -32,12 +32,12 @@ param (
 # download windows-bootstrap repo
 Write-Host "Download windows-bootstrap files..."
 $bootstrapArchive = Join-Path $tmpDir "bootstrap.zip"
-Download-File 'https://github.com/JonathanPorta/windows-bootstrap/archive/master.zip' $bootstrapArchive
+DoFileDownload 'https://github.com/JonathanPorta/windows-bootstrap/archive/master.zip' $bootstrapArchive
 
 # download 7zip
 Write-Host "Download 7Zip commandline tool..."
 $7zaExe = Join-Path $tmpDir '7za.exe'
-Download-File 'https://chocolatey.org/7za.exe' "$7zaExe"
+DoFileDownload 'https://chocolatey.org/7za.exe' "$7zaExe"
 
 # unzip the package
 Write-Host "Extracting $bootstrapArchive to $tmpDir..."
